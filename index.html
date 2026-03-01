@@ -1,0 +1,676 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="icon" type="image/png" href="logo.png">
+  <title>AJ WEB | Sites para Lanchonete e Barbearia</title>
+  <meta name="description" content="Criação de sites simples e profissionais para comércios. Sites rápidos, bonitos e com botão de WhatsApp." />
+
+  <style>
+    :root{
+      --bg:#f7f8fb;
+      --card:#ffffff;
+      --text:#111827;
+      --muted:#6b7280;
+      --line: rgba(17,24,39,.10);
+      --brand:#2563eb;
+      --brand2:#22c55e;
+      --shadow: 0 18px 50px rgba(15,23,42,.10);
+      --radius:20px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(900px 500px at 12% 8%, rgba(37,99,235,.12), transparent 60%),
+        radial-gradient(900px 500px at 88% 18%, rgba(34,197,94,.12), transparent 60%),
+        var(--bg);
+    }
+    a{color:inherit;text-decoration:none}
+    .container{width:min(1120px,92%); margin:0 auto}
+
+    /* Header */
+    .header{
+      position:sticky; top:0; z-index:30;
+      backdrop-filter: blur(10px);
+      background: rgba(247,248,251,.75);
+      border-bottom:1px solid var(--line);
+    }
+    .header__wrap{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:14px;
+      padding:14px 0;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px;
+      font-weight:800;
+      letter-spacing:.2px;
+    }
+    .brand__icon{
+      width:42px;height:42px;border-radius:16px;
+      display:grid;place-items:center;
+      color:white;
+      background: linear-gradient(135deg, var(--brand), var(--brand2));
+      box-shadow: 0 12px 30px rgba(37,99,235,.18);
+    }
+    .nav{display:flex; align-items:center; gap:10px}
+    .nav a{
+      color:var(--muted);
+      padding:10px 10px;
+      border-radius:12px;
+      font-weight:600;
+    }
+    .nav a:hover{background: rgba(17,24,39,.05); color:var(--text)}
+
+    .menuBtn{
+      display:none;
+      width:46px;height:46px;border-radius:16px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.7);
+      cursor:pointer;
+    }
+    .menuBtn span{display:block;height:2px;margin:6px 12px;background:var(--text);opacity:.75}
+
+    /* Buttons */
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center; gap:8px;
+      padding:12px 16px;
+      border-radius:16px;
+      border:1px solid transparent;
+      background: linear-gradient(135deg, var(--brand), #4f46e5);
+      color:white;
+      font-weight:800;
+      cursor:pointer;
+      box-shadow: 0 14px 40px rgba(37,99,235,.18);
+      transition: transform .12s ease;
+    }
+    .btn:hover{transform: translateY(-1px)}
+    .btn:active{transform: translateY(0px) scale(.99)}
+    .btn--ghost{
+      background: rgba(255,255,255,.7);
+      color:var(--text);
+      border:1px solid var(--line);
+      box-shadow:none;
+      font-weight:800;
+    }
+    .btn--small{padding:10px 12px;border-radius:14px;font-weight:800}
+    .btn--full{width:100%}
+
+    /* Hero */
+    .hero{padding:28px 0 12px}
+    .hero__grid{
+      display:grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap:18px;
+      align-items:stretch;
+    }
+    .chipRow{display:flex; gap:10px; flex-wrap:wrap}
+    .chip{
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.65);
+      padding:8px 12px;
+      border-radius:999px;
+      color:var(--muted);
+      font-weight:700;
+      font-size:.92rem;
+    }
+    .chip b{color:var(--text)}
+    h1{
+      margin:12px 0 10px;
+      font-size: clamp(2rem, 4vw, 3.1rem);
+      line-height:1.06;
+    }
+    .lead{color:var(--muted); line-height:1.65; max-width: 62ch}
+    .hero__cta{display:flex; gap:12px; flex-wrap:wrap; margin:18px 0 10px}
+
+    .panel{
+      background: rgba(255,255,255,.75);
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding:18px;
+    }
+    .panel h3{margin:0 0 6px}
+    .panel p{margin:0 0 12px; color:var(--muted); line-height:1.6}
+
+    .metrics{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:12px;
+      margin-top:14px;
+    }
+    .metric{
+      background: rgba(255,255,255,.7);
+      border:1px solid var(--line);
+      border-radius: 18px;
+      padding:12px 14px;
+    }
+    .metric strong{display:block; font-size:1.15rem}
+    .metric span{color:var(--muted); font-weight:700; font-size:.9rem}
+
+    /* Form */
+    .form label{display:block; margin:10px 0; color:var(--muted); font-size:.92rem; font-weight:800}
+    .form input, .form select, .form textarea{
+      width:100%;
+      margin-top:6px;
+      padding:12px 12px;
+      border-radius:16px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.85);
+      color:var(--text);
+      outline:none;
+      resize: vertical;
+      font-weight:700;
+    }
+    .form input:focus, .form select:focus, .form textarea:focus{border-color: rgba(37,99,235,.35)}
+    .hint{display:block; margin-top:10px; color:var(--muted); font-size:.92rem; font-weight:700}
+
+    /* Sections */
+    .section{padding:56px 0}
+    .section__head{
+      display:flex; align-items:flex-end; justify-content:space-between;
+      gap:14px; flex-wrap:wrap;
+      margin-bottom:16px;
+    }
+    .section__head h2{margin:0; font-size:1.9rem}
+    .section__head p{margin:0; color:var(--muted); font-weight:700; line-height:1.6; max-width: 70ch}
+
+    .grid3{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:14px;
+    }
+    .card{
+      background: rgba(255,255,255,.75);
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding:16px;
+    }
+    .card h3{margin:0 0 8px}
+    .card p{margin:0; color:var(--muted); line-height:1.65; font-weight:700}
+
+    .pill{
+      display:inline-flex;
+      gap:8px;
+      align-items:center;
+      padding:7px 10px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.65);
+      color:var(--muted);
+      font-weight:800;
+      font-size:.9rem;
+      margin-top:12px;
+    }
+
+    /* Templates */
+    .templates{
+      display:grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap:14px;
+    }
+    .template{
+      background: rgba(255,255,255,.75);
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding:16px;
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+    }
+    .preview{
+      border-radius: var(--radius);
+      border:1px solid var(--line);
+      background:
+        linear-gradient(135deg, rgba(37,99,235,.12), rgba(34,197,94,.10)),
+        rgba(255,255,255,.5);
+      height:170px;
+      position:relative;
+      overflow:hidden;
+    }
+    .preview::after{
+      content:"";
+      position:absolute; inset:-40px;
+      background: radial-gradient(closest-side, rgba(255,255,255,.55), transparent 60%);
+      transform: rotate(18deg);
+      opacity:.7;
+    }
+    .previewLabel{
+      position:absolute; left:14px; bottom:14px;
+      padding:8px 10px;
+      border-radius:999px;
+      border:1px solid rgba(17,24,39,.10);
+      background: rgba(255,255,255,.82);
+      font-weight:900;
+    }
+    .template__footer{
+      display:flex; justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap;
+    }
+
+    /* Pricing */
+    .pricing{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:14px;
+    }
+    .priceCard{
+      background: rgba(255,255,255,.75);
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding:16px;
+      position:relative;
+      overflow:hidden;
+    }
+    .priceCard.featured{
+      border-color: rgba(37,99,235,.28);
+      box-shadow: 0 20px 60px rgba(37,99,235,.18);
+    }
+    .price{
+      font-size:1.6rem;
+      font-weight:1000;
+      margin:10px 0 8px;
+    }
+    .list{margin:0; padding-left:18px; color:var(--muted); font-weight:800}
+    .list li{margin:7px 0}
+
+    /* FAQ */
+    .faq{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:14px;
+    }
+    details{
+      background: rgba(255,255,255,.75);
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding:14px;
+    }
+    summary{cursor:pointer; font-weight:1000}
+    details p{margin:10px 0 0; color:var(--muted); font-weight:800; line-height:1.6}
+
+    /* Footer */
+    .footer{
+      border-top:1px solid var(--line);
+      padding:20px 0;
+      color:var(--muted);
+    }
+    .footer__wrap{
+      display:flex; justify-content:space-between; align-items:center;
+      gap:10px; flex-wrap:wrap;
+    }
+
+    /* Floating button */
+    .float{
+      position:fixed;
+      right:18px; bottom:18px;
+      width:58px; height:58px;
+      border-radius:20px;
+      display:grid; place-items:center;
+      color:white;
+      background: linear-gradient(135deg, var(--brand2), #16a34a);
+      box-shadow: 0 16px 50px rgba(34,197,94,.22);
+      font-size:22px;
+    }
+
+    @media (max-width: 980px){
+      .hero__grid{grid-template-columns: 1fr}
+    }
+    @media (max-width: 820px){
+      .grid3{grid-template-columns: 1fr}
+      .templates{grid-template-columns: 1fr}
+      .pricing{grid-template-columns: 1fr}
+      .faq{grid-template-columns: 1fr}
+      .metrics{grid-template-columns: 1fr}
+      .menuBtn{display:block}
+      .nav{
+        position:absolute;
+        top:68px; right:4%;
+        width:min(92%, 380px);
+        display:none;
+        flex-direction:column;
+        align-items:stretch;
+        padding:12px;
+        border-radius: var(--radius);
+        border:1px solid var(--line);
+        background: rgba(255,255,255,.92);
+        box-shadow: var(--shadow);
+      }
+      .nav.open{display:flex}
+    }
+  </style>
+</head>
+
+<body>
+  <header class="header" id="topo">
+    <div class="container header__wrap">
+      <a class="brand" href="#topo" aria-label="Início">
+        <span class="brand__icon">AW</span>
+        <span>AJ <span style="color:var(--brand)">WEB</span></span>
+      </a>
+
+      <button class="menuBtn" id="menuBtn" aria-label="Abrir menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+
+      <nav class="nav" id="nav">
+        <a href="#como">Como funciona</a>
+        <a href="#modelos">Modelos</a>
+        <a href="#planos">Planos</a>
+        <a href="#faq">Dúvidas</a>
+        <a class="btn btn--small" href="#contato">Orçamento</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="hero">
+    <div class="container hero__grid">
+      <div>
+        <div class="chipRow">
+          <span class="chip">✅ <b>WhatsApp</b> com mensagem pronta</span>
+          <span class="chip">⚡ <b>Rápido</b> e leve</span>
+          <span class="chip">📱 <b>100%</b> no celular</span>
+        </div>
+
+        <h1>Eu crio sites que fazem o cliente <span style="color:var(--brand)">clicar</span> e pedir.</h1>
+        <p class="lead">
+          Você quer vender sites simples pra comércios? Então seu próprio site precisa parecer profissional.
+          Aqui você mostra seus modelos (lanchonete/barbearia) e fecha tudo pelo WhatsApp.
+        </p>
+
+        <div class="hero__cta">
+          <a class="btn" id="btnWhats" href="#">💬 Falar no WhatsApp</a>
+          <a class="btn btn--ghost" href="#modelos">Ver modelos</a>
+        </div>
+
+        <div class="metrics">
+          <div class="metric"><strong>1 página</strong><span>ou mais (se quiser)</span></div>
+          <div class="metric"><strong>CTA forte</strong><span>pra converter</span></div>
+          <div class="metric"><strong>Personaliza</strong><span>do jeito do cliente</span></div>
+        </div>
+      </div>
+
+      <section class="panel" id="contato">
+        <h3>Peça seu orçamento</h3>
+        <p>Preenche e eu já mando a mensagem pronta no WhatsApp (sem enrolação).</p>
+
+        <form class="form" id="form">
+          <label>
+            Seu nome
+            <input id="nome" type="text" placeholder="Ex: João" required />
+          </label>
+
+          <label>
+            Tipo de comércio
+            <select id="tipo" required>
+              <option value="Lanchonete">Lanchonete</option>
+              <option value="Barbearia">Barbearia</option>
+              <option value="Outro comércio">Outro comércio</option>
+            </select>
+          </label>
+
+          <label>
+            O que você quer no site?
+            <textarea id="detalhes" rows="4" placeholder="Ex: fotos, endereço, cardápio/serviços, promoções, Instagram..." required></textarea>
+          </label>
+
+          <button class="btn btn--full" type="submit">Enviar no WhatsApp</button>
+          <small class="hint">Você vai ser direcionado pro WhatsApp com a mensagem pronta.</small>
+        </form>
+      </section>
+    </div>
+  </main>
+
+  <section class="section" id="como">
+    <div class="container">
+      <div class="section__head">
+        <div>
+          <h2>Como funciona</h2>
+          <p>Um jeito simples de vender site: você mostra modelo, o cliente pede pelo WhatsApp, você personaliza e entrega.</p>
+        </div>
+      </div>
+
+      <div class="grid3">
+        <div class="card">
+          <h3>1) Escolhe um modelo</h3>
+          <p>O cliente entra e escolhe: lanchonete ou barbearia (ou outro).</p>
+          <span class="pill">🎯 Vitrine pronta</span>
+        </div>
+        <div class="card">
+          <h3>2) Personaliza</h3>
+          <p>Você troca logo, cores, fotos, endereço e texto do jeito que o cliente quer.</p>
+          <span class="pill">🧩 Do jeito dele</span>
+        </div>
+        <div class="card">
+          <h3>3) Entrega e pronto</h3>
+          <p>Entrega o link e o cliente já começa a receber pedidos e contatos.</p>
+          <span class="pill">🚀 Site no ar</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="modelos">
+    <div class="container">
+      <div class="section__head">
+        <div>
+          <h2>Modelos prontos</h2>
+          <p>Quando você tiver seus sites prontos, coloque o link real no botão “Abrir demo”. Por enquanto, já dá pra vender com esses cards.</p>
+        </div>
+      </div>
+
+      <div class="templates">
+        <article class="template">
+          <div class="preview">
+            <div class="previewLabel">🍔 Modelo Lanchonete</div>
+          </div>
+          <div>
+            <h3>Lanchonete — Cardápio + WhatsApp</h3>
+            <p class="muted" style="font-weight:800; line-height:1.6;">
+              Ideal pra pedido rápido: cardápio, promoções, localização e WhatsApp.
+            </p>
+          </div>
+          <div class="template__footer">
+            <button class="btn btn--small js-quero" data-tipo="Lanchonete">Quero esse modelo</button>
+            <button class="btn btn--small btn--ghost js-demo" data-demo="Lanchonete">Abrir demo</button>
+          </div>
+        </article>
+
+        <article class="template">
+          <div class="preview">
+            <div class="previewLabel">💈 Modelo Barbearia</div>
+          </div>
+          <div>
+            <h3>Barbearia — Serviços + Agenda</h3>
+            <p class="muted" style="font-weight:800; line-height:1.6;">
+              Serviços, horários, galeria e botão fixo do WhatsApp.
+            </p>
+          </div>
+          <div class="template__footer">
+            <button class="btn btn--small js-quero" data-tipo="Barbearia">Quero esse modelo</button>
+            <button class="btn btn--small btn--ghost js-demo" data-demo="Barbearia">Abrir demo</button>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="planos">
+    <div class="container">
+      <div class="section__head">
+        <div>
+          <h2>Planos (exemplo)</h2>
+          <p>Troca os valores pelos seus. Esse layout é bom porque deixa o cliente comparar e escolher rápido.</p>
+        </div>
+      </div>
+
+      <div class="pricing">
+        <div class="priceCard">
+          <h3>Básico</h3>
+          <div class="price">R$ 500–600</div>
+          <ul class="list">
+            <li>✅ 1 página</li>
+            <li>✅ WhatsApp</li>
+            <li>✅ Localização</li>
+          </ul>
+          <div style="margin-top:14px">
+            <button class="btn btn--full js-plano" data-plano="Básico">Fechar</button>
+          </div>
+        </div>
+
+        <div class="priceCard featured">
+          <h3>Profissional</h3>
+          <div class="price">R$ 700–800</div>
+          <ul class="list">
+            <li>✅ Seções completas</li>
+            <li>✅ Galeria</li>
+            <li>✅ Form WhatsApp</li>
+          </ul>
+          <div style="margin-top:14px">
+            <button class="btn btn--full js-plano" data-plano="Profissional">Fechar</button>
+          </div>
+        </div>
+
+        <div class="priceCard">
+          <h3>Premium</h3>
+          <div class="price">R$ 1200+</div>
+          <ul class="list">
+            <li>✅ 3–5 páginas</li>
+            <li>✅ Melhor SEO</li>
+            <li>✅ Suporte</li>
+          </ul>
+          <div style="margin-top:14px">
+            <button class="btn btn--full js-plano" data-plano="Premium">Fechar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="faq">
+    <div class="container">
+      <div class="section__head">
+        <div>
+          <h2>Dúvidas</h2>
+          <p>Isso aqui ajuda MUITO a vender, porque corta objeção do cliente.</p>
+        </div>
+      </div>
+
+      <div class="faq">
+        <details>
+          <summary>O site funciona no celular?</summary>
+          <p>Sim. Esse layout é feito pra celular primeiro e fica bonito no PC também.</p>
+        </details>
+        <details>
+          <summary>Como o cliente fala comigo?</summary>
+          <p>Pelo WhatsApp com mensagem pronta. O cliente só clica e envia.</p>
+        </details>
+        <details>
+          <summary>O que você precisa pra fazer o site?</summary>
+          <p>Nome do comércio, endereço, WhatsApp, fotos e lista de serviços/cardápio.</p>
+        </details>
+        <details>
+          <summary>Dá pra mudar cores e estilo?</summary>
+          <p>Dá sim. Eu personalizo do jeito que o cliente pedir.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container footer__wrap">
+      <p>© <span id="year"></span> AJ WEB — Sites para comércios</p>
+      <a href="#topo" style="font-weight:900; color:var(--brand)">Voltar ao topo ↑</a>
+    </div>
+  </footer>
+
+  <a class="float" id="floatWhats" href="#" aria-label="WhatsApp">💬</a>
+
+  <script>
+    // ===== CONFIG =====
+    const WHATSAPP_NUMBER = "5587988270837"; // TROQUE PELO SEU
+    const SUA_MARCA = "Adão Web";
+
+    function linkWhats(msg){
+      return `https://wa.me/${5587988270837}?text=${encodeURIComponent(msg)}`;
+    }
+    function abrirWhats(msg){
+      window.open(linkWhats(msg), "_blank");
+    }
+
+    // ===== Ano =====
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // ===== Menu =====
+    const menuBtn = document.getElementById("menuBtn");
+    const nav = document.getElementById("nav");
+    menuBtn.addEventListener("click", () => {
+      const open = nav.classList.toggle("open");
+      menuBtn.setAttribute("aria-expanded", String(open));
+    });
+    nav.querySelectorAll("a").forEach(a => a.addEventListener("click", () => nav.classList.remove("open")));
+
+    // ===== Whats padrão =====
+    const msgPadrao = `Olá! Vi o site (${SUA_MARCA}) e quero um site para meu comércio. Pode me passar valores e prazo?`;
+    document.getElementById("btnWhats").addEventListener("click", (e)=>{ e.preventDefault(); abrirWhats(msgPadrao); });
+    document.getElementById("floatWhats").addEventListener("click", (e)=>{ e.preventDefault(); abrirWhats(msgPadrao); });
+
+    // ===== Form =====
+    document.getElementById("form").addEventListener("submit", (e)=>{
+      e.preventDefault();
+      const nome = document.getElementById("nome").value.trim();
+      const tipo = document.getElementById("tipo").value;
+      const detalhes = document.getElementById("detalhes").value.trim();
+
+      if(!nome || !detalhes){
+        alert("Preenche seu nome e o que você quer no site.");
+        return;
+      }
+
+      const msg =
+`Olá! Meu nome é ${nome}.
+Quero um site para: ${tipo}.
+
+Quero no site:
+${detalhes}
+
+Pode me passar o valor e o prazo?`;
+
+      abrirWhats(msg);
+    });
+
+    // ===== Botões “Quero esse modelo” =====
+    document.querySelectorAll(".js-quero").forEach(btn=>{
+      btn.addEventListener("click", ()=>{
+        const tipo = btn.dataset.tipo || "Modelo";
+        const msg = `Olá! Quero o modelo de ${tipo}. Pode me dizer o valor e o que você precisa (fotos, endereço, etc)?`;
+        abrirWhats(msg);
+      });
+    });
+
+    // ===== Botões demo (por enquanto só mostra aviso) =====
+    document.querySelectorAll(".js-demo").forEach(btn=>{
+      btn.addEventListener("click", ()=>{
+        const demo = btn.dataset.demo || "Demo";
+        alert(`Aqui você coloca o link real do demo de: ${demo}\n\nQuando tiver o modelo pronto, me diga que eu deixo esse botão abrindo o site.`);
+      });
+    });
+
+    // ===== Planos =====
+    document.querySelectorAll(".js-plano").forEach(btn=>{
+      btn.addEventListener("click", ()=>{
+        const plano = btn.dataset.plano || "Plano";
+        const msg = `Olá! Quero fechar o plano ${plano} para meu site. Pode me explicar como funciona e o valor final?`;
+        abrirWhats(msg);
+      });
+    });
+  </script>
+</body>
+</html>
